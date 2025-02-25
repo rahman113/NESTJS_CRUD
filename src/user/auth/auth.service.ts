@@ -29,9 +29,15 @@ export class AuthService {
           // Generate JWT token (expires in 24 hours)
            // ✅ Get secret and expiry from .env
         const secret = this.configService.get<string>('JWT_SECRET');
+        console.log("secret", secret);
+        
+         // ✅ Get secret and expiry from .env
         const expiresIn = this.configService.get<string>('JWT_EXPIRES_IN', '24h');
-
-          const token = this.jwtService.sign({ userId: user.id }, { secret: expiresIn});
+        console.log("expiresIn", expiresIn);
+        
+          const token = this.jwtService.sign(
+            { userId: user.id },
+            { secret, expiresIn});
     return { token };
     }
 }

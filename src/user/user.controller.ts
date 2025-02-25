@@ -1,8 +1,10 @@
 import { Controller, Get, Post, Body, Param, Patch, Delete } from '@nestjs/common';
 import { UserService } from './user.service';
-import { Prisma } from '@prisma/client';
+
 import {CreateUserDto} from "./dto/create-user.dto"
 import {UpdateUserDto} from "./dto/update-user.dto"
+import { JwtAuthGuard } from './auth/guards/jwt-auth.guard';
+import { UseGuards } from '@nestjs/common';  
 
 @Controller('users')
 export class UserController {
@@ -24,6 +26,7 @@ export class UserController {
     }
 
     @Patch(':id')
+    @UseGuards(JwtAuthGuard) // ✅ Protect this route
     update(@Param('id') id: string, @Body() data:UpdateUserDto) {
         return this.userService.updateUser(id, data);
     }
