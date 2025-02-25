@@ -8,9 +8,9 @@ import { UserModule } from './user/user.module';
 
 @Module({
   imports: [
-    ConfigModule.forRoot() , // ✅ Load .env file (Must be included only once)
+    ConfigModule.forRoot() , //  Load .env file (Must be included only once)
     PrismaModule, 
-    UserModule,   // ✅ Include UserModule (which contains AuthModule)
+    UserModule,   //  Include UserModule (which contains AuthModule)
   ],
 })
 export class AppModule {}

@@ -26,7 +26,7 @@ export class UserController {
     }
 
     @Patch(':id')
-    @UseGuards(JwtAuthGuard) // ✅ Protect this route
+    @UseGuards(JwtAuthGuard) //  Protect this route
     update(@Param('id') id: string, @Body() data:UpdateUserDto) {
         return this.userService.updateUser(id, data);
     }

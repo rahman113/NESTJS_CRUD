@@ -11,7 +11,7 @@ export class AuthService {
     constructor(
         private prisma: PrismaService,
          private jwtService: JwtService,
-         private configService: ConfigService // ✅ Inject ConfigService
+         private configService: ConfigService //  Inject ConfigService
         )  {}
 
     async login(data: LoginDto) {
@@ -27,17 +27,25 @@ export class AuthService {
         }
 
           // Generate JWT token (expires in 24 hours)
-           // ✅ Get secret and expiry from .env
+           //  Get secret and expiry from .env
         const secret = this.configService.get<string>('JWT_SECRET');
         console.log("secret", secret);
         
-         // ✅ Get secret and expiry from .env
+         //  Get secret and expiry from .env
         const expiresIn = this.configService.get<string>('JWT_EXPIRES_IN', '24h');
         console.log("expiresIn", expiresIn);
         
           const token = this.jwtService.sign(
             { userId: user.id },
             { secret, expiresIn});
-    return { token };
+    return {
+        "message":"login successfull",
+        "token":token,
+        data: {
+            "id": user.id,
+            "name": user.name,
+            "email": user.email     
+        }
+    }
     }
 }
