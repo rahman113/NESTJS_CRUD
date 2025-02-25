@@ -4,6 +4,7 @@ import { ConfigModule } from '@nestjs/config';
 
 import { PrismaModule } from './prisma/prisma.module';
 import { UserModule } from './user/user.module';
+import { MailService } from './mail/mail.service';
 
 
 @Module({
@@ -12,5 +13,6 @@ import { UserModule } from './user/user.module';
     PrismaModule, 
     UserModule,   //  Include UserModule (which contains AuthModule)
   ],
+  providers: [MailService],
 })
 export class AppModule {}
