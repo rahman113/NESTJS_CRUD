@@ -38,7 +38,7 @@ export class AuthService {
         console.log("expiresIn", expiresIn);
 
         const token = this.jwtService.sign(
-            { userId: user.id },
+            { id: user.id },
             { secret, expiresIn });
         return {
             "message": "login successfull",
@@ -69,7 +69,11 @@ export class AuthService {
         // Send email with the token
         await this.mailService.sendPasswordResetEmail(email, resetToken);
 
-        return { message: 'Password reset email sent!' };
+        return {
+            
+                "status": "success",
+                "message": "Password reset email sent! Check your inbox.",
+         };
 
     }
     async resetPassword(token: string, newPassword: string) {
@@ -88,7 +92,9 @@ export class AuthService {
                 data: { password: hashedPassword },
             });
     
-            return { message: 'Password reset successful' };
+            return {
+                status: true,
+                 message: 'Password reset successful' };
         } catch (error) {
             throw new UnauthorizedException('Invalid or expired token');
         }

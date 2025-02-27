@@ -33,7 +33,6 @@ export class MailService {
                 <p>This link will expire in 15 minutes.</p>
             `,
         };
-
         await this.transporter.sendMail(mailOptions);
         return { message: 'Password reset email sent!' };
     }

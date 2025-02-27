@@ -100,5 +100,24 @@ export class UserService {
           message: 'User deleted successfully',
         };
       }
-      
+
+      async updateUserProfilePicture(userId: string, filename: string) {
+        const user = await this.prisma.users.findUnique({
+            where: { id: userId },
+        });
+        if (!user) {
+            throw new NotFoundException(`User with id ${userId} not found`);
+        }   
+        const updatedUser = await this.prisma.users.update({
+            where: { id: userId },
+            data: { profilePicture: filename },
+        });
+    
+        return {
+            success: true,
+            message: "Profile picture updated successfully",
+            data: updatedUser,
+        }; 
+    }
+
 }
