@@ -33,7 +33,9 @@ export class UserService {
         data: {
             id: newUser.id,
             name: newUser.name,
+            fullName: newUser.fullName,
             email: newUser.email,
+            phoneNumber: newUser.phoneNumber,
             createdAt: newUser.createdAt
         }
        }

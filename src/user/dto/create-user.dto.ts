@@ -5,6 +5,7 @@ import {IsEmail,IsString, MinLength, Matches } from "class-validator"
 export class CreateUserDto {
     @IsString()
   name: string; 
+  fullName: string
     @IsEmail()
     email: string
 
@@ -14,6 +15,8 @@ export class CreateUserDto {
         message: 'Password must contain at least one uppercase letter, one lowercase letter, one number, and one special character',
       })
     password: string
+    phoneNumber: string
+    
 
     profilePicture?: string;
 }
